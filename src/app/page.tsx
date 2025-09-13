@@ -36,11 +36,11 @@ export default function Home() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 md:p-12 overflow-hidden relative">
         <Image
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_webp/03da72234522093.68c4ebbaa1384.png"
+            src="https://images.unsplash.com/photo-1710162734135-8dc148f53abe?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Background"
             fill
             className="object-cover -z-20"
-            data-ai-hint="futuristic abstract"
+            data-ai-hint="abstract colorful"
         />
         <div className="absolute inset-0 bg-black/50 -z-10" />
         <div className="absolute top-8 left-8">
