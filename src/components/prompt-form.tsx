@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Rocket, Sparkles } from "lucide-react";
+import { Rocket } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const FormSchema = z.object({
   prompt: z.string().min(10, {
@@ -40,19 +40,10 @@ export default function PromptForm({ onSubmit, isAnimating }: PromptFormProps) {
   }
 
   return (
-    <Card className={`shadow-2xl shadow-primary/10 border-primary/20 transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-      <CardHeader className="text-center">
-        <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4 inline-block">
-            <Sparkles className="h-8 w-8 text-primary" />
-        </div>
-        <CardTitle className="font-headline text-3xl sm:text-4xl">Promptomation</CardTitle>
-        <CardDescription className="text-base">
-          Describe the browser task you want to automate in plain English.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
+    <Card className={`bg-white/5 border-white/20 backdrop-blur-md shadow-2xl shadow-primary/10 transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
+      <CardContent className="p-4">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(handleFormSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="prompt"
@@ -61,7 +52,7 @@ export default function PromptForm({ onSubmit, isAnimating }: PromptFormProps) {
                   <FormControl>
                     <Textarea
                       placeholder="e.g., 'Go to gmail.com, log in with my credentials, and delete all emails from promotions.'"
-                      className="min-h-[120px] resize-none text-base"
+                      className="min-h-[120px] resize-none text-base bg-transparent border-0 text-white placeholder:text-white/60 focus-visible:ring-0 focus-visible:ring-offset-0"
                       {...field}
                     />
                   </FormControl>
