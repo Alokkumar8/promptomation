@@ -18,14 +18,14 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 md:p-12 overflow-hidden">
+    <main className="flex min-h-screen w-full flex-col items-center justify-center p-4 sm:p-8 md:p-12 overflow-hidden relative">
       {!isAgentRunning &&
         <div className={`w-full max-w-2xl relative ${isAnimating ? 'animate-form-out' : 'animate-in fade-in zoom-in-95 duration-500'}`}>
           <PromptForm onSubmit={handlePromptSubmit} isAnimating={isAnimating} />
         </div>
       }
       {isAgentRunning && (
-        <AgentView prompt={prompt} isAnimating={isAnimating} />
+        <AgentView prompt={prompt} />
       )}
     </main>
   );

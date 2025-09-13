@@ -7,10 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 
 interface AgentViewProps {
   prompt: string;
-  isAnimating: boolean;
 }
 
-export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
+export default function AgentView({ prompt }: AgentViewProps) {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
@@ -21,13 +20,9 @@ export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
   }, []);
   
   return (
-    <div className="w-full h-[85vh] grid grid-cols-1 lg:grid-cols-2 gap-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="w-full h-full absolute top-0 left-0 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
       <div 
-        className="w-full h-full absolute"
-        style={{
-            top: 0,
-            left: 0,
-        }}
+        className="w-full h-full absolute top-0 left-0"
         >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
           {/* Left Panel BG */}
@@ -36,7 +31,7 @@ export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
             style={{
               animation: 'expandLeft 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
-            d="M50 50 H50 V50 H50z"
+            d="M40 30 H60 V70 H40z"
           />
           {/* Left Panel Border */}
           <path
@@ -46,7 +41,7 @@ export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
             style={{
               animation: 'expandLeft 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
-            d="M50 50 H50 V50 H50z"
+            d="M40 30 H60 V70 H40z"
           />
 
           {/* Right Panel BG */}
@@ -55,7 +50,7 @@ export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
             style={{
               animation: 'expandRight 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
-            d="M50 50 H50 V50 H50z"
+            d="M40 30 H60 V70 H40z"
           />
           {/* Right Panel Border */}
           <path
@@ -65,7 +60,7 @@ export default function AgentView({ prompt, isAnimating }: AgentViewProps) {
             style={{
               animation: 'expandRight 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
-            d="M50 50 H50 V50 H50z"
+            d="M40 30 H60 V70 H40z"
           />
         </svg>
       </div>
