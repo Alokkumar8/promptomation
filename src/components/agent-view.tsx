@@ -26,7 +26,7 @@ export default function AgentView({ prompt }: AgentViewProps) {
         >
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
           <path
-            className="fill-card"
+            className="fill-[hsla(0,0%,100%,0.05)]"
             style={{
               animation: 'expandLeft 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
@@ -43,7 +43,7 @@ export default function AgentView({ prompt }: AgentViewProps) {
           />
 
           <path
-            className="fill-card"
+            className="fill-[hsla(0,0%,100%,0.05)]"
             style={{
               animation: 'expandRight 1.2s cubic-bezier(0.6, 0.0, 0.2, 1) forwards',
             }}
