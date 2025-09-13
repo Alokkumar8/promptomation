@@ -63,10 +63,10 @@ export default function AgentView({ prompt }: AgentViewProps) {
 
       <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
         <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
-          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none min-h-0">
+          <Card className="flex flex-col flex-grow bg-white/5 border-white/20 backdrop-blur-md shadow-2xl shadow-primary/10 min-h-0">
             <CardHeader>
-              <CardTitle className="font-headline">Agent Logs</CardTitle>
-              <CardDescription className="truncate">
+              <CardTitle className="font-headline text-white">Agent Logs</CardTitle>
+              <CardDescription className="truncate text-white/80">
                 Task: {prompt}
               </CardDescription>
             </CardHeader>
@@ -76,10 +76,10 @@ export default function AgentView({ prompt }: AgentViewProps) {
           </Card>
         </div>
         <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
-          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
+          <Card className="flex flex-col flex-grow bg-white/5 border-white/20 backdrop-blur-md shadow-2xl shadow-primary/10">
             <CardHeader>
-              <CardTitle className="font-headline">Live View</CardTitle>
-              <CardDescription>
+              <CardTitle className="font-headline text-white">Live View</CardTitle>
+              <CardDescription className="text-white/80">
                 A real-time view of the agent's browser.
               </CardDescription>
             </CardHeader>
