@@ -62,20 +62,20 @@ export default function AgentView({ prompt }: AgentViewProps) {
       </div>
 
       <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
-        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full overflow-hidden`}>
-          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
+        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
+          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none min-h-0">
             <CardHeader>
               <CardTitle className="font-headline">Agent Logs</CardTitle>
               <CardDescription className="truncate">
                 Task: {prompt}
               </CardDescription>
             </CardHeader>
-            <CardContent className="flex-grow overflow-hidden">
+            <CardContent className="flex-grow min-h-0">
               <LogFeed />
             </CardContent>
           </Card>
         </div>
-        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full overflow-hidden`}>
+        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
           <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
             <CardHeader>
               <CardTitle className="font-headline">Live View</CardTitle>
