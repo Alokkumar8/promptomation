@@ -32,15 +32,15 @@ export default function Home() {
         <div className="absolute top-8 left-8">
             <div className="flex items-center gap-2">
                 <Sparkles className="h-8 w-8 text-primary" />
-                <h1 className="font-headline text-3xl text-white">Promptomation</h1>
+                <h1 className="font-headline text-3xl text-white"></h1>
             </div>
         </div>
 
       {!isAgentRunning &&
         <div className={`w-full max-w-2xl relative text-center ${isAnimating ? 'animate-form-out' : 'animate-in fade-in zoom-in-95 duration-500'}`}>
-           <h2 className="font-headline text-3xl sm:text-4xl text-white">Promptomation</h2>
-           <p className="text-base text-white/80 mt-2 mb-8">
-                Describe the browser task you want to automate in plain English.
+           <h2 className="font-headline text-3xl sm:text-4xl text-white">What will you work today?</h2>
+           <p className="text-base text-white/80 mt-2 mb-8 max-w-xl mx-auto">
+                vibe work your way to the top. Build AI browser agent that can automate your work so you can sit back and relax and enjoy your day
            </p>
           <PromptForm onSubmit={handlePromptSubmit} isAnimating={isAnimating} />
         </div>
