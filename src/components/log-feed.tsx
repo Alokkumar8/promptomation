@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Bot, FileText, MousePointerClick, Type } from 'lucide-react';
+import { Skeleton } from './ui/skeleton';
 
 interface Log {
   timestamp: number;
@@ -23,6 +24,7 @@ const getIconForMessage = (message: string) => {
 
 export default function LogFeed({ agentId }: LogFeedProps) {
   const [logs, setLogs] = useState<Log[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,9 +45,12 @@ export default function LogFeed({ agentId }: LogFeedProps) {
         }
       } catch (error) {
         console.error("Failed to fetch logs:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     
+    fetchLog();
     const interval = setInterval(fetchLog, 1000); // Fetch logs every second
 
     return () => clearInterval(interval);
@@ -63,7 +68,32 @@ export default function LogFeed({ agentId }: LogFeedProps) {
   return (
     <ScrollArea className="h-full w-full rounded-md border border-dashed border-accent/50 p-4" ref={scrollAreaRef}>
       <div className="flex flex-col gap-4">
-        {logs.length === 0 && (
+        {isLoading && (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start gap-3">
+              <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+              <div className="flex-grow space-y-2">
+                <Skeleton className="h-4 w-24 bg-accent/20" />
+                <Skeleton className="h-4 w-4/5 bg-accent/20" />
+              </div>
+            </div>
+             <div className="flex items-start gap-3 opacity-60">
+              <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+              <div className="flex-grow space-y-2">
+                <Skeleton className="h-4 w-24 bg-accent/20" />
+                <Skeleton className="h-4 w-3/5 bg-accent/20" />
+              </div>
+            </div>
+             <div className="flex items-start gap-3 opacity-30">
+              <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+              <div className="flex-grow space-y-2">
+                <Skeleton className="h-4 w-24 bg-accent/20" />
+                <Skeleton className="h-4 w-4/5 bg-accent/20" />
+              </div>
+            </div>
+          </div>
+        )}
+        {!isLoading && logs.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-muted-foreground pt-16 text-center">
                 <Bot className="h-12 w-12 mb-4" />
                 <p className="font-headline">Waiting for agent to start...</p>
