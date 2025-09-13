@@ -9,14 +9,30 @@ import Image from 'next/image';
 export default function Home() {
   const [isAgentRunning, setIsAgentRunning] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [agentId, setAgentId] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handlePromptSubmit = (submittedPrompt: string) => {
+  const handlePromptSubmit = async (submittedPrompt: string) => {
     setPrompt(submittedPrompt);
     setIsAnimating(true);
-    setTimeout(() => {
-      setIsAgentRunning(true);
-    }, 1200); // Animation duration
+    
+    try {
+      const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}`);
+      const data = await response.json();
+      if (data.agent_id) {
+        setAgentId(data.agent_id);
+        setTimeout(() => {
+          setIsAgentRunning(true);
+        }, 1200); // Animation duration
+      } else {
+        // Handle error - agent_id not returned
+        console.error("Agent ID not found in response");
+        setIsAnimating(false); // Reset animation if there's an error
+      }
+    } catch (error) {
+      console.error("Failed to run agent from prompt:", error);
+      setIsAnimating(false); // Reset animation if there's an error
+    }
   };
 
   return (
@@ -44,8 +60,8 @@ export default function Home() {
           <PromptForm onSubmit={handlePromptSubmit} isAnimating={isAnimating} />
         </div>
       }
-      {isAgentRunning && (
-        <AgentView prompt={prompt} />
+      {isAgentRunning && agentId && (
+        <AgentView prompt={prompt} agentId={agentId} />
       )}
     </main>
   );

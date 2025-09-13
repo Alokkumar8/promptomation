@@ -9,6 +9,10 @@ interface Log {
   message: string;
 }
 
+interface LogFeedProps {
+  agentId: string;
+}
+
 const getIconForMessage = (message: string) => {
     const lowerMessage = message.toLowerCase();
     if (lowerMessage.includes('click')) return <MousePointerClick className="h-4 w-4" />;
@@ -17,29 +21,35 @@ const getIconForMessage = (message: string) => {
     return <Bot className="h-4 w-4" />;
 }
 
-export default function LogFeed() {
+export default function LogFeed({ agentId }: LogFeedProps) {
   const [logs, setLogs] = useState<Log[]>([]);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!agentId) return;
+
     const fetchLog = async () => {
       try {
-        const response = await fetch('/api/logs');
+        const response = await fetch(`https://aiagents.onrender.com/api-get-logs?agent_id=${agentId}`);
         if (!response.ok) return;
-        const newLog = await response.json();
-        setLogs(prevLogs => [...prevLogs, newLog]);
+        const newLogs = await response.json();
+        if (Array.isArray(newLogs)) {
+            // The API returns the full log history, so we replace the existing logs.
+            const formattedLogs = newLogs.map((log: any) => ({
+                timestamp: log.timestamp || Date.now(),
+                message: log.log || log.message || ''
+            }));
+            setLogs(formattedLogs);
+        }
       } catch (error) {
         console.error("Failed to fetch logs:", error);
       }
     };
     
-    // Initial log
-    fetchLog();
-    
-    const interval = setInterval(fetchLog, 5000);
+    const interval = setInterval(fetchLog, 1000); // Fetch logs every second
 
     return () => clearInterval(interval);
-  }, []);
+  }, [agentId]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -60,8 +70,8 @@ export default function LogFeed() {
                 <p className="text-sm">Logs will appear here shortly.</p>
             </div>
         )}
-        {logs.map((log) => (
-          <div key={log.timestamp} className="flex items-start gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        {logs.map((log, index) => (
+          <div key={`${log.timestamp}-${index}`} className="flex items-start gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
             <div className="p-2 bg-accent/20 rounded-full text-accent">
                 {getIconForMessage(log.message)}
             </div>
