@@ -20,7 +20,7 @@ export default function AgentView({ prompt }: AgentViewProps) {
   }, []);
   
   return (
-    <div className="w-full h-full absolute top-0 left-0 grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
+    <div className="w-full h-screen absolute top-0 left-0">
       <div 
         className="w-full h-full absolute top-0 left-0 -z-10"
         >
@@ -60,32 +60,34 @@ export default function AgentView({ prompt }: AgentViewProps) {
           />
         </svg>
       </div>
-      
-      <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full`}>
-        <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
-          <CardHeader>
-            <CardTitle className="font-headline">Agent Logs</CardTitle>
-            <CardDescription className="truncate">
-              Task: {prompt}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow overflow-hidden">
-            <LogFeed />
-          </CardContent>
-        </Card>
-      </div>
-      <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full`}>
-        <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
-          <CardHeader>
-            <CardTitle className="font-headline">Live View</CardTitle>
-            <CardDescription>
-              A real-time view of the agent's browser.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-grow">
-            <LiveView />
-          </CardContent>
-        </Card>
+
+      <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
+        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-[75vh]`}>
+          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
+            <CardHeader>
+              <CardTitle className="font-headline">Agent Logs</CardTitle>
+              <CardDescription className="truncate">
+                Task: {prompt}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow overflow-hidden">
+              <LogFeed />
+            </CardContent>
+          </Card>
+        </div>
+        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full`}>
+          <Card className="flex flex-col flex-grow bg-transparent border-none shadow-none">
+            <CardHeader>
+              <CardTitle className="font-headline">Live View</CardTitle>
+              <CardDescription>
+                A real-time view of the agent's browser.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-grow">
+              <LiveView />
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
