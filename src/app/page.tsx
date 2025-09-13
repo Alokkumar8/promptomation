@@ -13,29 +13,24 @@ export default function Home() {
   const [agentId, setAgentId] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const handlePromptSubmit = async (submittedPrompt: string) => {
+  const handlePromptSubmit = (submittedPrompt: string) => {
     setPrompt(submittedPrompt);
     setIsAnimating(true);
-    
+    setAgentId("10163");
+
     // This timeout ensures the animation plays before the component is swapped
-    setTimeout(async () => {
-      try {
-        const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`);
-        if (response.ok) {
-          // The API was called successfully, we can now proceed.
-          // We will use the static agentId since the API doesn't return one.
-          setAgentId("10163");
-          setIsAgentRunning(true);
-          setIsAnimating(false); // Reset animation state
-        } else {
-          console.error("Failed to create agent. Status:", response.status);
-          setIsAnimating(false);
-        }
-      } catch (error) {
-        console.error("Failed to run agent from prompt:", error);
-        setIsAnimating(false);
-      }
-    }, 1200); // Wait for the form-out animation to complete
+    setTimeout(() => {
+        setIsAgentRunning(true);
+    }, 1200); // This should match the animation duration
+
+    // Fire off the API call in the background. No need to await it here
+    // as we are navigating to the next screen optimistically.
+    fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`)
+      .catch(error => {
+          console.error("Failed to run agent from prompt:", error);
+          // Optional: handle error, e.g., show a toast notification
+          // For now, we'll proceed to the agent view anyway since we have a static ID
+      });
   };
 
   return (
