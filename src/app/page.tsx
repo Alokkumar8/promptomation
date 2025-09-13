@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -20,13 +21,14 @@ export default function Home() {
     setTimeout(async () => {
       try {
         const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`);
-        const data = await response.json();
-        if (data.agent_id) {
-          setAgentId(data.agent_id);
+        if (response.ok) {
+          // The API was called successfully, we can now proceed.
+          // We will use the static agentId since the API doesn't return one.
+          setAgentId("10163");
           setIsAgentRunning(true);
           setIsAnimating(false); // Reset animation state
         } else {
-          console.error("Agent ID not found in response");
+          console.error("Failed to create agent. Status:", response.status);
           setIsAnimating(false);
         }
       } catch (error) {
