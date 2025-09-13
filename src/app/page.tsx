@@ -32,7 +32,7 @@ export default function Home() {
         <div className="absolute top-8 left-8">
             <div className="flex items-center gap-2">
                 <Sparkles className="h-8 w-8 text-primary" />
-                <h1 className="font-headline text-3xl text-white"></h1>
+                <h1 className="font-headline text-3xl text-white">Promptomation</h1>
             </div>
         </div>
 
