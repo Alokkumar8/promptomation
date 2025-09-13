@@ -95,4 +95,42 @@
         d: path("M51 0 H100 V100 H51z");
       }
     }
+
+    .btn-liquid-glass {
+        position: relative;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .btn-liquid-glass:hover {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-liquid-glass::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+        transform: translate(-50%, -50%);
+        transition: all 0.6s ease;
+        opacity: 0;
+        animation: liquid-shine 5s infinite linear;
+    }
+
+    .btn-liquid-glass:hover::before {
+        opacity: 1;
+    }
+
+    @keyframes liquid-shine {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
 }

@@ -60,7 +60,7 @@ export default function PromptForm({ onSubmit, isAnimating }: PromptFormProps) {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full text-lg py-6" size="lg" variant="default" disabled={isAnimating}>
+            <Button type="submit" className="w-full text-lg py-6 btn-liquid-glass text-white" size="lg" variant="default" disabled={isAnimating}>
               <Rocket className="mr-2 h-5 w-5" />
               {isAnimating ? 'Creating...' : 'Create Agent'}
             </Button>
