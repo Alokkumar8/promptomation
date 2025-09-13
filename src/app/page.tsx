@@ -16,23 +16,24 @@ export default function Home() {
     setPrompt(submittedPrompt);
     setIsAnimating(true);
     
-    try {
-      const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`);
-      const data = await response.json();
-      if (data.agent_id) {
-        setAgentId(data.agent_id);
-        setTimeout(() => {
+    // This timeout ensures the animation plays before the component is swapped
+    setTimeout(async () => {
+      try {
+        const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`);
+        const data = await response.json();
+        if (data.agent_id) {
+          setAgentId(data.agent_id);
           setIsAgentRunning(true);
-        }, 1200); // Animation duration
-      } else {
-        // Handle error - agent_id not returned
-        console.error("Agent ID not found in response");
-        setIsAnimating(false); // Reset animation if there's an error
+          setIsAnimating(false); // Reset animation state
+        } else {
+          console.error("Agent ID not found in response");
+          setIsAnimating(false);
+        }
+      } catch (error) {
+        console.error("Failed to run agent from prompt:", error);
+        setIsAnimating(false);
       }
-    } catch (error) {
-      console.error("Failed to run agent from prompt:", error);
-      setIsAnimating(false); // Reset animation if there's an error
-    }
+    }, 1200); // Wait for the form-out animation to complete
   };
 
   return (
@@ -51,7 +52,7 @@ export default function Home() {
             </div>
         </div>
 
-      {!isAgentRunning &&
+      {!isAgentRunning ?
         <div className={`w-full max-w-2xl relative text-center ${isAnimating ? 'animate-form-out' : 'animate-in fade-in zoom-in-95 duration-500'}`}>
            <h2 className="font-headline text-3xl sm:text-4xl text-white">Promptomation</h2>
            <p className="text-base text-white/80 mt-2 mb-8 max-w-xl mx-auto">
@@ -59,10 +60,9 @@ export default function Home() {
            </p>
           <PromptForm onSubmit={handlePromptSubmit} isAnimating={isAnimating} />
         </div>
+        :
+        agentId && <AgentView prompt={prompt} agentId={agentId} />
       }
-      {isAgentRunning && agentId && (
-        <AgentView prompt={prompt} agentId={agentId} />
-      )}
     </main>
   );
 }

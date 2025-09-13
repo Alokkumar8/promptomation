@@ -16,9 +16,10 @@ export default function AgentView({ prompt, agentId }: AgentViewProps) {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
+    // This timer should align with the end of the SVG path animations
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 500); // Delay content appearance to sync with animation
+    }, 1200); 
     return () => clearTimeout(timer);
   }, []);
   
@@ -65,7 +66,7 @@ export default function AgentView({ prompt, agentId }: AgentViewProps) {
       </div>
 
       <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-6 p-4 sm:p-8 md:p-12">
-        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
+        <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
           <Card className="flex flex-col flex-grow bg-white/10 border-white/20 backdrop-blur-md shadow-2xl shadow-primary/10 min-h-0">
             <CardHeader>
               <CardTitle className="font-headline text-white">Agent Logs</CardTitle>
@@ -104,7 +105,7 @@ export default function AgentView({ prompt, agentId }: AgentViewProps) {
             </CardContent>
           </Card>
         </div>
-        <div className={`transition-opacity duration-500 delay-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
+        <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'} flex flex-col h-full min-h-0`}>
           <Card className="flex flex-col flex-grow bg-white/5 border-white/20 backdrop-blur-md shadow-2xl shadow-primary/10">
             <CardHeader>
               <CardTitle className="font-headline text-white">Live View</CardTitle>
