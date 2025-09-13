@@ -46,15 +46,18 @@ export default function LogFeed({ agentId }: LogFeedProps) {
       } catch (error) {
         console.error("Failed to fetch logs:", error);
       } finally {
-        setIsLoading(false);
+        if(logs.length > 0 || !isLoading) {
+          setIsLoading(false);
+        }
       }
     };
     
-    fetchLog();
+    // Initial load with a small delay to show skeleton
+    setTimeout(fetchLog, 1000);
     const interval = setInterval(fetchLog, 1000); // Fetch logs every second
 
     return () => clearInterval(interval);
-  }, [agentId]);
+  }, [agentId, isLoading, logs.length]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {

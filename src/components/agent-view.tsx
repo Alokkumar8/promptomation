@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import LogFeed from "./log-feed";
 import LiveView from "./live-view";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Bot } from "lucide-react";
 
 interface AgentViewProps {
   prompt: string;
@@ -72,7 +74,33 @@ export default function AgentView({ prompt, agentId }: AgentViewProps) {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow min-h-0">
-              <LogFeed agentId={agentId} />
+              {showContent ? (
+                <LogFeed agentId={agentId} />
+              ) : (
+                <div className="flex flex-col gap-4 p-4">
+                  <div className="flex items-start gap-3">
+                    <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+                    <div className="flex-grow space-y-2">
+                      <Skeleton className="h-4 w-24 bg-accent/20" />
+                      <Skeleton className="h-4 w-4/5 bg-accent/20" />
+                    </div>
+                  </div>
+                   <div className="flex items-start gap-3 opacity-60">
+                    <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+                    <div className="flex-grow space-y-2">
+                      <Skeleton className="h-4 w-24 bg-accent/20" />
+                      <Skeleton className="h-4 w-3/5 bg-accent/20" />
+                    </div>
+                  </div>
+                   <div className="flex items-start gap-3 opacity-30">
+                    <Skeleton className="h-10 w-10 rounded-full bg-accent/20" />
+                    <div className="flex-grow space-y-2">
+                      <Skeleton className="h-4 w-24 bg-accent/20" />
+                      <Skeleton className="h-4 w-4/5 bg-accent/20" />
+                    </div>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -85,7 +113,13 @@ export default function AgentView({ prompt, agentId }: AgentViewProps) {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <LiveView agentId={agentId} />
+               {showContent ? (
+                <LiveView agentId={agentId} />
+               ) : (
+                <div className="w-full h-full p-4">
+                    <Skeleton className="w-full h-full bg-primary/10" />
+                </div>
+               )}
             </CardContent>
           </Card>
         </div>
