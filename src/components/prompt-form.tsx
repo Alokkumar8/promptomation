@@ -51,7 +51,7 @@ export default function PromptForm({ onSubmit, isAnimating }: PromptFormProps) {
                 <FormItem>
                   <FormControl>
                     <Textarea
-                      placeholder="e.g., 'Go to gmail.com, log in with my credentials, and delete all emails from promotions.'"
+                      placeholder="e.g., 'buy iPhone 15 32 gb black on amazon'"
                       className="min-h-[120px] resize-none text-base bg-transparent border-0 text-white placeholder:text-white/60 focus-visible:ring-0 focus-visible:ring-offset-0"
                       {...field}
                     />
