@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -39,7 +40,7 @@ export default function LogFeed({ agentId }: LogFeedProps) {
             // The API returns the full log history, so we replace the existing logs.
             const formattedLogs = newLogs.map((log: any) => ({
                 timestamp: log.timestamp || Date.now(),
-                message: log.log || log.message || ''
+                message: log.log || ''
             }));
             setLogs(formattedLogs);
         }
