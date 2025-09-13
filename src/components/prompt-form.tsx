@@ -41,11 +41,6 @@ export default function PromptForm({ onSubmit, isAnimating }: PromptFormProps) {
 
   return (
     <Card className={`shadow-2xl shadow-primary/10 border-primary/20 transition-opacity duration-300 ${isAnimating ? 'opacity-0' : 'opacity-100'}`}>
-        <div className="absolute inset-0 -z-10">
-            <div className={`absolute inset-0 border-2 border-primary/20 rounded-lg ${isAnimating ? 'animate-expand-left' : ''}`} />
-            <div className={`absolute inset-0 border-2 border-primary/20 rounded-lg ${isAnimating ? 'animate-expand-right' : ''}`} />
-        </div>
-
       <CardHeader className="text-center">
         <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4 inline-block">
             <Sparkles className="h-8 w-8 text-primary" />
