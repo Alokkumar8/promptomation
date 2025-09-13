@@ -17,7 +17,7 @@ export default function Home() {
     setIsAnimating(true);
     
     try {
-      const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}`);
+      const response = await fetch(`https://aiagents.onrender.com/api-run-agent-from-prompt?prompt=${encodeURIComponent(submittedPrompt)}&agent_id=10163`);
       const data = await response.json();
       if (data.agent_id) {
         setAgentId(data.agent_id);
