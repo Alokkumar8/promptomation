@@ -35,7 +35,8 @@ export default function LogFeed({ agentId }: LogFeedProps) {
       try {
         const response = await fetch(`https://aiagents.onrender.com/api-get-logs?agent_id=${agentId}`);
         if (!response.ok) return;
-        const newLogs = await response.json();
+        const data = await response.json();
+        const newLogs = data.logs;
         if (Array.isArray(newLogs)) {
             // The API returns the full log history, so we replace the existing logs.
             const formattedLogs = newLogs.map((log: any) => ({
@@ -111,7 +112,7 @@ export default function LogFeed({ agentId }: LogFeedProps) {
             </div>
             <div>
                 <p className="font-mono text-xs text-muted-foreground">
-                  {new Date(log.timestamp).toLocaleTimeString()}
+                  {new Date(log.timestamp * 1000).toLocaleTimeString()}
                 </p>
                 <p className="text-sm">{log.message}</p>
             </div>
